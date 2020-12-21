@@ -14,23 +14,23 @@
                 "description": "VMs Admin password"
             }
         },
-        "virtualMachineSize": {
-            "defaultValue": "Standard_B2s",
-            "allowedValues": [
-                "Standard_B2s",
-                "Standard_F4s",
-                "Standard_A2_v2"
-            ],
-            "type": "String",
-            "metadata": {
-                "description": "VM tier"
-            }
-        },
         "licenseCode": {
             "defaultValue": "",
             "type": "String",
             "metadata": {
                 "description": "ProcessMining license"
+            }
+        },
+        "environment": {
+            "defaultValue": "POV",
+            "allowedValues": [
+                "POV",
+                "PILOT",
+                "BOOTCAMP"
+            ],
+            "type": "String",
+            "metadata": {
+                "description": "Resources size based on environment type"
             }
         },
         "location": {
@@ -68,7 +68,21 @@
         "scriptFileString": "[variables('scriptUriNamePieces')[sub(length(variables('scriptUriNamePieces')), 1)]]",
         "scriptFileBreakString": "[split(variables('scriptFileString'), '?')]",
         "scriptFileName": "[variables('scriptFileBreakString')[0]]",
-        "configurePM": "[concat ('powershell -ExecutionPolicy Unrestricted -File ',' ', variables('scriptFileName'),' ','-licenseCode',' ',parameters('licenseCode'))]"
+        "configurePM": "[concat ('powershell -ExecutionPolicy Unrestricted -File ',' ', variables('scriptFileName'),' ','-licenseCode',' ',parameters('licenseCode'))]",
+        "pmVM":  {
+            "POV": {
+                "virtualMachineSize": "Standard_D2s_v4",
+                "diskSizeGB": 64
+            },
+            "PILOT": {
+                "virtualMachineSize": "Standard_D4s_v4",
+                "diskSizeGB": 128
+            },
+            "BOOTCAMP": {
+                "virtualMachineSize": "Standard_D8s_v4",
+                "diskSizeGB": 128
+            }
+        }
     },
     "resources": [
         {
@@ -182,11 +196,12 @@
               },
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "[parameters('virtualMachineSize')]"
+                    "vmSize": "[variables('pmVM')[parameters('environment')].virtualMachineSize]"
                 },
                 "storageProfile": {
                     "osDisk": {
                         "createOption": "fromImage",
+                        "diskSizeGB": "[variables('pmVM')[parameters('environment')].diskSizeGB]",
                         "managedDisk": {
                             "storageAccountType": "[variables('osDiskType')]"
                         }
@@ -195,6 +210,7 @@
                         "id": "[variables('imageRef')]"
                     }
                 },
+                
                 "networkProfile": {
                     "networkInterfaces": [
                         {
