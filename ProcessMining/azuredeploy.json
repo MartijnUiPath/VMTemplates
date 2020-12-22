@@ -2,6 +2,12 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "vmName": {
+            "type": "String",
+            "metadata": {
+                "description": "Unique VM prefix name"
+            }
+        },
         "adminusername": {
             "type": "String",
             "metadata": {
@@ -46,10 +52,9 @@
         }
     },
     "variables": {
-         "location": "[parameters('location')]",
-        "vm-prefix": "[toLower(uniqueString(resourceGroup().id))]",
-        "dnsSuffix": "[concat('az',toLower(uniqueString(resourceGroup().id)))]",
-        "vmName": "[variables('vm-prefix')]",
+        "location": "[parameters('location')]",
+        "vmName": "[toLower(concat(parameters('vmName'),resourceGroup().id))]",
+        "dnsSuffix": "[concat(variables('vmName'),toLower(uniqueString(resourceGroup().id)))]",
         "osDiskType": "StandardSSD_LRS",
         "publicIpAddressName": "[concat(variables('vmName'), '-pip')]",
         "networkInterfaceName": "[concat(variables('vmName'),'-nic')]",
@@ -71,7 +76,7 @@
         "configurePM": "[concat ('powershell -ExecutionPolicy Unrestricted -File ',' ', variables('scriptFileName'),' ','-licenseCode',' ',parameters('licenseCode'))]",
         "pmVM":  {
             "POV": {
-                "virtualMachineSize": "Standard_D2s_v4",
+                "virtualMachineSize": "Standard_D4s_v4",
                 "diskSizeGB": 128
             },
             "PILOT": {
