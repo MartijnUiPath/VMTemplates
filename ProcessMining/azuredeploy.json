@@ -53,7 +53,7 @@
     },
     "variables": {
         "location": "[parameters('location')]",
-        "vmName": "[toLower(concat(parameters('vmName'),resourceGroup().id))]",
+        "vmName": "[toLower(parameters('vmName'))]",
         "dnsSuffix": "[concat(variables('vmName'),toLower(uniqueString(resourceGroup().id)))]",
         "osDiskType": "StandardSSD_LRS",
         "publicIpAddressName": "[concat(variables('vmName'), '-pip')]",
