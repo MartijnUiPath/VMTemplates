@@ -72,7 +72,7 @@
         "pmVM":  {
             "POV": {
                 "virtualMachineSize": "Standard_D2s_v4",
-                "diskSizeGB": 64
+                "diskSizeGB": 128
             },
             "PILOT": {
                 "virtualMachineSize": "Standard_D4s_v4",
