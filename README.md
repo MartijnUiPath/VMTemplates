@@ -1,7 +1,9 @@
 # VM Startup guide
-Context: 
+**Context:** 
 
-Until now, for each POV/Pilot/Bootcamp,  we had to manually install a new instance of UP Process Mining. To remedy this,  we developed several Azure VM templates which makes this process significantly easier and quicker. Detailed guide can be found here: https://uipath-my.sharepoint.com/:w:/p/martijn_copier/ET0gURzreXhJjz0TGq0Adu4BBIRPoQRg9zcfiK_hGarBXg?e=oo8ciM
+Until now, for each POV/Pilot/Bootcamp,  we had to manually install a new instance of UP Process Mining. To remedy this,  we developed several Azure VM templates which makes this process significantly easier and quicker. 
+
+**Detailed guide can be found here:** https://uipath-my.sharepoint.com/:w:/p/martijn_copier/ET0gURzreXhJjz0TGq0Adu4BBIRPoQRg9zcfiK_hGarBXg?e=oo8ciM
 
 
 Prerequisites:
