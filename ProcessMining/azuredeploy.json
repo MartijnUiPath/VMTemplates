@@ -116,12 +116,12 @@
                         }
                     },
                     {
-                        "name": "default-allow-8000",
+                        "name": "default-allow-443",
                         "properties": {
                             "priority": 1010,
                             "access": "Allow",
                             "direction": "Inbound",
-                            "destinationPortRange": "8000",
+                            "destinationPortRange": "443",
                             "protocol": "Tcp",
                             "sourcePortRange": "*",
                             "sourceAddressPrefix": "*",
