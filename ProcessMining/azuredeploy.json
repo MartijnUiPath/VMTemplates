@@ -126,8 +126,7 @@
                             "sourcePortRange": "*",
                             "sourceAddressPrefix": "*",
                             "destinationAddressPrefix": "*"
-                        }
-                    },
+			}
                     }
                 ]
             }
